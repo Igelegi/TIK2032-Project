@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home - Portofolio Saya</title>
+    <style>
+      /* CSS Utama untuk semua halaman */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #f5f5f5;
+        color: #333;
+        line-height: 1.6;
+        transition: background-color 0.3s, color 0.3s;
+        display: flex;
+      }
+
+      /* Left sidebar with header */
+      .sidebar {
+        width: 280px;
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        background-color: #1a73e8;
+        color: white;
+        padding: 30px;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s;
+        z-index: 100;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .sidebar h1 {
+        margin-bottom: 30px;
+        font-size: 2.2rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        padding-bottom: 20px;
+      }
+
+      .sidebar nav {
+        margin-top: 20px;
+      }
+
+      .sidebar nav ul {
+        list-style: none;
+      }
+
+      .sidebar nav ul li {
+        margin-bottom: 15px;
+      }
+
+      .sidebar nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.1rem;
+        padding: 10px 15px;
+        border-radius: 8px;
+        transition: background-color 0.3s, transform 0.2s;
+        display: flex;
+        align-items: center;
+      }
+
+      .sidebar nav ul li a i {
+        margin-right: 10px;
+        font-size: 18px;
+      }
+
+      .sidebar nav ul li a:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        transform: translateX(5px);
+      }
+
+      .sidebar nav ul li a.aktif {
+        background-color: rgba(255, 255, 255, 0.3);
+      }
+
+      /* Main content */
+      .main-content {
+        flex: 1;
+        margin-left: 280px;
+        padding: 30px;
+        transition: margin-left 0.3s;
+      }
+
+      section {
+        max-width: 900px;
+        margin: 0 auto 30px;
+        padding: 25px;
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s, box-shadow 0.3s;
+      }
+
+      h2 {
+        color: #1a73e8;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #e0e0e0;
+        padding-bottom: 15px;
+        transition: color 0.3s, border-bottom-color 0.3s;
+        font-size: 1.8rem;
+      }
+
+      p {
+        margin-bottom: 15px;
+      }
+
+      /* Khusus untuk halaman Home */
+      .highlight {
+        background-color: #e7f3ff;
+        padding: 15px;
+        border-left: 5px solid #1a73e8;
+        margin: 20px 0;
+        border-radius: 0 5px 5px 0;
+        transition: background-color 0.3s, border-left-color 0.3s;
+      }
+
+      /* Mobile menu toggle */
+      #menu-toggle {
+        display: none;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        background-color: #1a73e8;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        z-index: 200;
+        font-size: 18px;
+      }
+
+      /* Theme Toggle */
+      #tombol-tema {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #1a73e8;
+        color: white;
+        border: none;
+        padding: 12px 18px;
+        border-radius: 30px;
+        cursor: pointer;
+        font-weight: bold;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s, transform 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        z-index: 99;
+      }
+
+      #tombol-tema i {
+        font-size: 18px;
+      }
+
+      #tombol-tema:hover {
+        background-color: #1555b6;
+        transform: translateY(-3px);
+      }
+
+      /* Dark Theme */
+      .tema-gelap {
+        background-color: #121212;
+        color: #f0f0f0;
+      }
+
+      .tema-gelap .sidebar {
+        background-color: #1e1e1e;
+      }
+
+      .tema-gelap section {
+        background-color: #1e1e1e;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      .tema-gelap h2 {
+        color: #4a97f0;
+        border-bottom-color: #333;
+      }
+
+      .tema-gelap .highlight {
+        background-color: #2a4366;
+        border-left-color: #4a97f0;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 992px) {
+        .sidebar {
+          width: 240px;
+          padding: 20px;
+        }
+
+        .main-content {
+          margin-left: 240px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        body {
+          flex-direction: column;
+        }
+
+        .sidebar {
+          width: 100%;
+          height: auto;
+          position: relative;
+          padding: 15px;
+        }
+
+        .sidebar h1 {
+          font-size: 1.8rem;
+          margin-bottom: 20px;
+          padding-bottom: 15px;
+        }
+
+        .main-content {
+          margin-left: 0;
+          padding: 20px;
+        }
+
+        #menu-toggle {
+          display: block;
+        }
+
+        .sidebar.collapsed {
+          display: none;
+        }
+
+        .main-content.expanded {
+          margin-left: 0;
+        }
+      }
+    </style>
+    <!-- Font Awesome untuk ikon -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Mobile Menu Toggle -->
+    <button id="menu-toggle" class="collapsed">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Left Sidebar with Header -->
+    <div class="sidebar">
+      <h1>Welcome</h1>
+      <nav>
+        <ul>
+          <li>
+            <a href="index.html" class="aktif"
+              ><i class="fas fa-home"></i> Home</a
+            >
+          </li>
+          <li>
+            <a href="gallery.html"><i class="fas fa-images"></i> Gallery</a>
+          </li>
+          <li>
+            <a href="blog.html"><i class="fas fa-blog"></i> Blog</a>
+          </li>
+          <li>
+            <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <section>
+        <h2>Tentang Saya</h2>
+        <p>
+          Nama saya Kevin Legi. Saya seorang penggemar otomotif yang sangat
+          menyukai motor, terutama Yamaha Aerox New.
+        </p>
+        <div class="highlight">
+          <p>
+            Di blog saya, saya membahas berbagai topik menarik seputar Aerox
+            New, mulai dari keunggulan desainnya, performa mesin, hingga tips
+            perawatan yang dapat membantu Anda menjaga motor kesayangan Anda.
+          </p>
+        </div>
+        <p>
+          Saya percaya bahwa setiap pengendara berhak mendapatkan informasi yang
+          tepat untuk membuat keputusan yang bijak dalam memilih dan merawat
+          motor mereka.
+        </p>
+        <p>
+          Jangan ragu untuk menjelajahi blog saya untuk menemukan
+          artikel-artikel yang informatif dan bermanfaat!
+        </p>
+      </section>
+    </div>
+
+    <!-- Theme Toggle Button -->
+    <button id="tombol-tema">
+      <i class="fas fa-moon"></i>
+      <span>Ganti Tema</span>
+    </button>
+
+    <script>
+      // Mobile menu toggle
+      const menuToggle = document.getElementById("menu-toggle");
+      const sidebar = document.querySelector(".sidebar");
+      const mainContent = document.querySelector(".main-content");
+
+      menuToggle.addEventListener("click", function () {
+        sidebar.classList.toggle("collapsed");
+        mainContent.classList.toggle("expanded");
+
+        // Toggle icon
+        const icon = this.querySelector("i");
+        if (sidebar.classList.contains("collapsed")) {
+          icon.classList.remove("fa-bars");
+          icon.classList.add("fa-times");
+        } else {
+          icon.classList.remove("fa-times");
+          icon.classList.add("fa-bars");
+        }
+      });
+
+      // Dark theme toggle
+      const tombolTema = document.getElementById("tombol-tema");
+      const body = document.body;
+      const temaIcon = tombolTema.querySelector("i");
+      const temaText = tombolTema.querySelector("span");
+
+      // Fungsi untuk mengatur tema
+      function setTema(tema) {
+        if (tema === "gelap") {
+          body.classList.add("tema-gelap");
+          temaIcon.classList.remove("fa-moon");
+          temaIcon.classList.add("fa-sun");
+          temaText.textContent = "Tema Terang";
+          localStorage.setItem("tema", "gelap");
+        } else {
+          body.classList.remove("tema-gelap");
+          temaIcon.classList.remove("fa-sun");
+          temaIcon.classList.add("fa-moon");
+          temaText.textContent = "Tema Gelap";
+          localStorage.setItem("tema", "terang");
+        }
+      }
+
+      tombolTema.addEventListener("click", function () {
+        if (body.classList.contains("tema-gelap")) {
+          setTema("terang");
+        } else {
+          setTema("gelap");
+        }
+      });
+
+      // Cek preferensi tema yang tersimpan saat halaman dimuat
+      document.addEventListener("DOMContentLoaded", function () {
+        const temaTersimpan = localStorage.getItem("tema");
+
+        if (temaTersimpan) {
+          setTema(temaTersimpan);
+        }
+
+        // Add active class to current page links
+        const currentPage = window.location.pathname.split("/").pop();
+        const navLinks = document.querySelectorAll(".sidebar nav ul li a");
+
+        navLinks.forEach((link) => {
+          const linkHref = link.getAttribute("href");
+          if (linkHref === currentPage) {
+            link.classList.add("aktif");
+          } else {
+            link.classList.remove("aktif");
+          }
+        });
+
+        // Animasi untuk konten
+        const section = document.querySelector("section");
+        section.style.opacity = "0";
+        section.style.transform = "translateY(20px)";
+        section.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+
+        setTimeout(() => {
+          section.style.opacity = "1";
+          section.style.transform = "translateY(0)";
+        }, 200);
+      });
+    </script>
+  </body>
+</html>
